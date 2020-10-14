@@ -3,26 +3,23 @@
 include 'include/loginArr.php';
 include 'include/passwordArr.php';
 
-// $login = 'vismut';
-// $password = 'qwerty';
-
-$login = array_search($_POST['login'], $loginArr);
-$password = array_search($_POST['password'], $passwordArr);
-
 if (!empty($_POST)) {
-    
-    if(empty($_POST['login']) || empty($_POST['password'])) {
+
+    $login = $_POST['login'];
+    $password = $_POST['password'];
+
+    if (!in_array($_POST['login'], $loginArr) || !in_array($_POST['password'], $passwordArr)) {
         include 'include/error.php';
     } else {
-        if ($login === $password && $login !== false) {
-        // if ($_POST['login'] == $login && $_POST['password'] == $password) {
-            include 'include/succeess.php';
-        } else {
-            include 'include/error.php';
+        foreach ($loginArr as $loginValue) {
+            foreach ($passwordArr as $passwordValue) {
+                if ($login === $loginValue && $password === $passwordValue) {
+                    include 'include/succeess.php';
+                }
+            }
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +69,7 @@ if (!empty($_POST)) {
                 </div>
 
                 <div class="index-auth">
-                    <?php if ($_GET['login'] == 'yes') {
+                    <?php if (isset($_GET) && $_GET['login'] === 'yes') {
                         include 'include/form.php';
                     } ?>
                 </div>
