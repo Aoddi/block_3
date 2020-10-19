@@ -64,6 +64,10 @@ a:hover {
     padding: 0;
 }
 
+.main-menu.top {
+    font-size: 16px;
+}
+
 .main-menu.bottom {
     float: left;
 }
