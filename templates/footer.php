@@ -1,6 +1,6 @@
 <div class="clearfix">
     <ul class="main-menu bottom">
-        <?php helperMenu\showMenu($menuItemsArr, 'title', SORT_DESC); ?>
+        <?= helperMenu\showMenu($menuItemsArr, 'title', SORT_DESC); ?>
     </ul>
 </div>
 

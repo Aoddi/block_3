@@ -42,6 +42,30 @@ function checkLongSrting(array $item, string $key = 'title'): string
 }
 
 /**
+ * @param входной массив
+ * @return массив с данными активной страницы
+ */
+function searchActivePage(array $item)
+{
+    if (strstr($_SERVER['REQUEST_URI'], '/route/') === $item['path'] . 'index.php') {
+        return true;
+    }
+}
+
+/**
+ * @param входной массив
+ * @return заголовок активной вкладки
+ */
+function showTitle(array $array): string
+{
+    foreach ($array as $item) {
+        if (searchActivePage($item)) {
+            return $item['title'];
+        }
+    }
+}
+
+/**
  * Функция для вывода меню разделов в шапке и футере
  * @param входной массив, для сортировки
  * @param ключ элементов этого массива, по которому будет осуществлена сортировка
@@ -52,19 +76,13 @@ function showMenu(array $array, string $key = 'sort', $sort = SORT_ASC)
     $arr = arraySort($array, $key, $sort);
 
     foreach ($arr as $item) {
+
         $item['title'] = checkLongSrting($item);
-        echo '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '">' . $item['title'] . '</a></li>';
+
+        if (searchActivePage($item)) {
+            echo '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '" id="active">' . $item['title'] . '</a></li>';
+        } else {
+            echo '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '">' . $item['title'] . '</a></li>';
+        }
     }
 }
-
-// function showTitle(array $array, string $line)
-// {
-//     $str = (strstr($line, '/route/') . '/');
-
-//     foreach ($array as $item) {
-//         if ($item['path'] == $str) {
-//             return ($item['title']);
-//         }
-//     }
-
-// }

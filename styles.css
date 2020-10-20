@@ -92,6 +92,10 @@ a:hover {
     background: url(i/fl-bg-hover.gif) bottom repeat-x #67bdff;
 }
 
+#active {
+    text-decoration: underline;
+}
+
 .clearfix::after {
     content: "";
     display: table;
