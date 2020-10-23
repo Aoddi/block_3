@@ -21,6 +21,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/skillbox/homework/block_3/helpers/hel
 
     <div class="clear">
         <ul class="main-menu top">
-            <?= helperMenu\showMenu($menuItemsArr, 'sort', SORT_ASC); ?>
+            <?= showMenu($menuItemsArr, 'sort', SORT_ASC); ?>
         </ul>
     </div>

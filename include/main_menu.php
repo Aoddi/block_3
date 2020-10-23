@@ -30,4 +30,9 @@ $menuItemsArr = [
         'path' => '/route/sale/',
         'sort' => 2,
     ],
+    [
+        'title' => 'nonamenonamenonamenonamenoname',
+        'path' => '/route/noname/',
+        'sort' => 10,
+    ],
 ];

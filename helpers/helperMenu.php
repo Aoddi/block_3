@@ -1,26 +1,27 @@
 <?php
 
-namespace helperMenu;
-
 /**
  * Функция для сортировки пунктов меню
- * @param входной массив, для сортировки
- * @param ключ элементов этого массива, по которому будет осуществлена сортировка
+ * @param array входной массив, для сортировки
+ * @param string ключ элементов этого массива, по которому будет осуществлена сортировка
  * @param направление сортировки по возрастанию/по убыванию (SORT_ASC/SORT_DESC)
- * @return отсортированный массив
+ * @return array отсортированный массив
  */
-function arraySort(array $array, $key = 'sort', $sort = SORT_ASC): array
+function arraySort(array $array, string $key = 'sort', $sort = SORT_ASC): array
 {
-    array_multisort(array_column($array, $key), $sort, $array);
+    usort($array, function ($a, $b) use ($key, $sort) {
+        return ($sort == SORT_ASC) ? $a[$key] <=> $b[$key] : $b[$key] <=> $a[$key];
+    });
+
     return $array;
 }
 
 /**
  * Функция для вывода меню разделов в шапке и футере
- * @param строка
- * @param длина строки
- * @param конец строки
- * @return обрезанную строку с троеточием в конце
+ * @param string строка
+ * @param int длина строки
+ * @param string конец строки
+ * @return string обрезанную строку с троеточием в конце
  */
 function cutString(string $line, int $length = 12, string $appends = '...'): string
 {
@@ -28,38 +29,36 @@ function cutString(string $line, int $length = 12, string $appends = '...'): str
 }
 
 /**
- * @param входной массив
- * @param ключ элемента этого массива
- * @return обрезанную строку с троеточием в конце
+ * @param string заголовка меню
+ * @return string обрезанную строку с троеточием в конце
  */
-function checkLongSrting(array $item, string $key = 'title'): string
+function checkLongSrting(string $string): string
 {
-    if (mb_strlen($item[$key]) >= 15) {
-        $item[$key] = cutString($item[$key]);
+
+    if (mb_strlen($string) >= 15) {
+        $string = cutString($string);
     }
 
-    return $item[$key];
+    return $string;
 }
 
 /**
- * @param входной массив
- * @return массив с данными активной страницы
+ * @param string входная строка для проверки активной страницы 
+ * @return bool (true/false)
  */
-function searchActivePage(array $item)
+function searchActivePage(string $string): bool
 {
-    if (strstr($_SERVER['REQUEST_URI'], '/route/') === $item['path'] . 'index.php') {
-        return true;
-    }
+    return strstr($_SERVER['REQUEST_URI'], '/route/') === $string . 'index.php';
 }
 
 /**
- * @param входной массив
- * @return заголовок активной вкладки
+ * @param array входной массив
+ * @return string заголовок активной вкладки
  */
 function showTitle(array $array): string
 {
     foreach ($array as $item) {
-        if (searchActivePage($item)) {
+        if (searchActivePage($item['path'])) {
             return $item['title'];
         }
     }
@@ -67,22 +66,26 @@ function showTitle(array $array): string
 
 /**
  * Функция для вывода меню разделов в шапке и футере
- * @param входной массив, для сортировки
- * @param ключ элементов этого массива, по которому будет осуществлена сортировка
- * @param направление сортировки по возрастанию/по убыванию (SORT_ASC/SORT_DESC)
+ * @param array входной массив, для сортировки
+ * @param string ключ элементов этого массива, по которому будет осуществлена сортировка
+ * @param флаг направление сортировки по возрастанию/по убыванию (SORT_ASC/SORT_DESC)
+ * @return string с элементами меню
  */
-function showMenu(array $array, string $key = 'sort', $sort = SORT_ASC)
+function showMenu(array $array, string $key = 'sort', $sort = SORT_ASC): string
 {
+    $menuItems = '';
     $arr = arraySort($array, $key, $sort);
 
     foreach ($arr as $item) {
 
-        $item['title'] = checkLongSrting($item);
+        $item['title'] = checkLongSrting($item['title']);
 
-        if (searchActivePage($item)) {
-            echo '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '" id="active">' . $item['title'] . '</a></li>';
+        if (searchActivePage($item['path'])) {
+            $menuItems .= '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '" id="active">' . $item['title'] . '</a></li>';
         } else {
-            echo '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '">' . $item['title'] . '</a></li>';
+            $menuItems .= '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '">' . $item['title'] . '</a></li>';
         }
     }
+
+    return $menuItems;
 }
