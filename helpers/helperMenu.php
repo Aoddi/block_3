@@ -2,9 +2,9 @@
 
 /**
  * Функция для сортировки пунктов меню
- * @param array входной массив, для сортировки
- * @param string ключ элементов этого массива, по которому будет осуществлена сортировка
- * @param направление сортировки по возрастанию/по убыванию (SORT_ASC/SORT_DESC)
+ * @param array $array входной массив, для сортировки
+ * @param string $key ключ элементов этого массива, по которому будет осуществлена сортировка
+ * @param $sort направление сортировки по возрастанию/по убыванию (SORT_ASC/SORT_DESC)
  * @return array отсортированный массив
  */
 function arraySort(array $array, string $key = 'sort', $sort = SORT_ASC): array
@@ -18,9 +18,9 @@ function arraySort(array $array, string $key = 'sort', $sort = SORT_ASC): array
 
 /**
  * Функция для вывода меню разделов в шапке и футере
- * @param string строка
- * @param int длина строки
- * @param string конец строки
+ * @param string $line строка
+ * @param int $length длина строки
+ * @param string $appends конец строки
  * @return string обрезанную строку с троеточием в конце
  */
 function cutString(string $line, int $length = 12, string $appends = '...'): string
@@ -29,7 +29,7 @@ function cutString(string $line, int $length = 12, string $appends = '...'): str
 }
 
 /**
- * @param string заголовка меню
+ * @param string $string заголовка меню
  * @return string обрезанную строку с троеточием в конце
  */
 function checkLongSrting(string $string): string
@@ -43,7 +43,7 @@ function checkLongSrting(string $string): string
 }
 
 /**
- * @param string входная строка для проверки активной страницы 
+ * @param string $string входная строка для проверки активной страницы 
  * @return bool (true/false)
  */
 function searchActivePage(string $string): bool
@@ -52,7 +52,7 @@ function searchActivePage(string $string): bool
 }
 
 /**
- * @param array входной массив
+ * @param array $array входной массив
  * @return string заголовок активной вкладки
  */
 function showTitle(array $array): string
@@ -66,9 +66,9 @@ function showTitle(array $array): string
 
 /**
  * Функция для вывода меню разделов в шапке и футере
- * @param array входной массив, для сортировки
- * @param string ключ элементов этого массива, по которому будет осуществлена сортировка
- * @param флаг направление сортировки по возрастанию/по убыванию (SORT_ASC/SORT_DESC)
+ * @param array $array входной массив, для сортировки
+ * @param string $key ключ элементов этого массива, по которому будет осуществлена сортировка
+ * @param $sort флаг направление сортировки по возрастанию/по убыванию (SORT_ASC/SORT_DESC)
  * @return string с элементами меню
  */
 function showMenu(array $array, string $key = 'sort', $sort = SORT_ASC): string
