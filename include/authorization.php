@@ -23,15 +23,6 @@ if (isset($_GET) && $_GET['login'] === 'no') {
 }
 
 /**
- * Функция проверяет маркер в $_SESSION
- * @return string с HTML кнопкой
- */
-function checkLogin(): string
-{
-    return isSessionExists() ? '<a href="?login=no" class="btnExit">Выход</a>' : '<a href="?login=yes" class="btnLogin">Авторизация</a>';
-}
-
-/**
  * Функция проверяет авторизирован пользователь или нет
  * @return bool true/false
  */
