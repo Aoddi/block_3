@@ -1,0 +1,3 @@
+<?php 
+
+$passwords = ['qwerty12345', '0987654321', 'lololol', 'qwertyuiop', 'asdfghjkl', 'zxcvbnm', 'qazwsxedc', 'cdexswzaq',];

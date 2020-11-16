@@ -65,6 +65,27 @@ function showTitle(array $array): string
 }
 
 /**
+ * Функция для добавления атрибута id
+ * @param string $path путь до стр
+ */
+function insertId(string $path)
+{
+    if (searchActivePage($path)) {
+        return 'id="active"';
+    }
+}
+
+/**
+ * Функция вставляет ссылки в меню
+ * @param $path путь
+ * @return string ссылки
+ */
+function insertPath($path): string
+{
+    return isSessionExists() ? "/homework/block_3{$path}index.php" : "/homework/block_3/index.php";
+}
+
+/**
  * Функция для вывода меню разделов в шапке и футере
  * @param array $array входной массив, для сортировки
  * @param string $key ключ элементов этого массива, по которому будет осуществлена сортировка
@@ -74,17 +95,15 @@ function showTitle(array $array): string
 function showMenu(array $array, string $key = 'sort', $sort = SORT_ASC): string
 {
     $menuItems = '';
-    $arr = arraySort($array, $key, $sort);
+    $sortedMenu = arraySort($array, $key, $sort);
 
-    foreach ($arr as $item) {
+    foreach ($sortedMenu as $item) {
 
-        $item['title'] = checkLongSrting($item['title']);
+        $titleMenu = checkLongSrting($item['title']);
+        $activeMenuItem = insertId($item['path']);
+        $pathMenuItem = insertPath($item['path']);
 
-        if (searchActivePage($item['path'])) {
-            $menuItems .= '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '" id="active">' . $item['title'] . '</a></li>';
-        } else {
-            $menuItems .= '<li><a href="' . '/skillbox/homework/block_3' . $item['path'] . 'index.php' . '">' . $item['title'] . '</a></li>';
-        }
+        $menuItems .= '<li><a href="' . $pathMenuItem . '" ' . $activeMenuItem . '>' . $titleMenu . '</a></li>';
     }
 
     return $menuItems;
