@@ -1,23 +1,26 @@
 <?php
-require_once 'logins.php';
-require_once 'passwords.php';
 session_start();
+if (isset($_POST['authorization'])) {
 
-if (!empty($_POST)) {
+    $login = $_POST['login'];
+    $password = $_POST['password'];
 
-    if (in_array($_POST['login'], $logins) && in_array($_POST['password'], $passwords)) {
+    if (passwordVerification($login, $password)) {
         $_SESSION['successedLogin'] = true;
-        setcookie('login', $_POST['login'], time()+60*60*24*30, '/');
+        $_SESSION['idActiveUser'] = getIdActiveUser($login);
+        activeUser($_SESSION['idActiveUser']);
+        setcookie('login', $login, time() + 60 * 60 * 24 * 30, '/');
         require_once 'include/succeess.php';
     } else {
         require_once 'include/error.php';
     }
 } else if (isSessionExists()) {
-    setcookie('login', $_COOKIE['login'], time()+60*60*24*30, '/');
+    setcookie('login', $_COOKIE['login'], time() + 60 * 60 * 24 * 30, '/');
 }
 
-// если пользователь нажал на "Выход" удаляет удаляет сессию и перенаправляет на главную стр
+// если пользователь нажал на "Выход" удаляет сессию и перенаправляет на главную стр
 if (isset($_GET) && $_GET['login'] === 'no') {
+    inactiveUser($_SESSION['idActiveUser']);
     unset($_SESSION['successedLogin']);
     header("Location: /homework/block_3/index.php");
 }

@@ -18,7 +18,7 @@
             </td>
         </tr>
         <tr>
-            <td><input type="submit" value="Войти"></td>
+            <td><input type="submit" name="authorization" value="Войти"></td>
         </tr>
     </table>
 </form>

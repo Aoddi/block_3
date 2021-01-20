@@ -1,6 +1,4 @@
-<?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/homework/block_3/templates/header.php');
-?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/homework/block_3/templates/header.php'); ?>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>

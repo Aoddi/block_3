@@ -6,6 +6,11 @@ $menuItemsArr = [
         'sort' => 1,
     ],
     [
+        'title' => 'Пользователь',
+        'path' => '/route/user/',
+        'sort' => 7,
+    ],
+    [
         'title' => 'О нас',
         'path' => '/route/about/',
         'sort' => 3,
@@ -31,8 +36,8 @@ $menuItemsArr = [
         'sort' => 2,
     ],
     [
-        'title' => 'nonamenonamenonamenonamenoname',
-        'path' => '/route/noname/',
-        'sort' => 10,
+        'title' => 'Сообщения',
+        'path' => '/route/posts/',
+        'sort' => 6,
     ],
 ];

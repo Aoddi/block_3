@@ -117,6 +117,14 @@ a:hover {
     margin: 0 0 10px 0;
 }
 
+.user__wrapper {
+    display: flex;
+}
+
+.messages__wrapper {
+    display: flex;
+}
+
 .right-collum-index {
     background: #efefef;
     margin: 0;
@@ -200,4 +208,8 @@ a:hover {
 
 .iat label {
 	display: block;
+}
+
+.error {
+    color: red;
 }

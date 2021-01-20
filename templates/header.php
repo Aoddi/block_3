@@ -1,6 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/homework/block_3/include/main_menu.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/homework/block_3/helpers/helperMenu.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/homework/block_3/include/dbConnect.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/homework/block_3/include/authorization.php');
 
 ?>
